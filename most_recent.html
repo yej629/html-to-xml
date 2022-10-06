@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+    <title>Document</title>
+        
+<style>
+#popup01, #popup02, #popup03{
+    display: none;
+}
+#popup01, #popup02, #popup03{
+width: 900px;
+height: 600px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #fff;
+z-index: 2;
+    }
+      
+.backon{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #00000054;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.close, .close2, .close3 {
+  position:absolute;
+  top:-25px;
+  right: 0;
+  cursor:pointer;
+}
+
+.openPopup, .nextPopup1_2, .nextPopup2_3{
+  cursor:pointer;
+}
+.nextPopup1_2, .nextPopup2_3{
+  position: absolute;
+  top:100%;
+  left: 100%;
+  transform: translate(-100%, -100%);
+}
+.prevPopup2_1, .prevPopup3_2{
+  cursor:pointer;
+  position: absolute;
+  top:100%;
+  left: 0%;
+  transform: translate(0%, -100%);
+}
+.my_text{
+  font-size:  1em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+    
+<script>
+  $(document).ready(function( $ ){     
+	  
+    $(".openPopup").on("click", function(event) { 
+    	$("#popup01").show();  
+    	$("body").append('<div class="backon"></div>');
+    	});
+    
+    $(".nextPopup1_2").on("click", function(event) { 
+    	$("#popup01").hide();
+        $("#popup02").show();  
+        });
+    $(".nextPopup2_3").on("click", function(event) { 
+    	$("#popup02").hide();
+        $("#popup03").show();  
+        });
+    
+    $(".prevPopup2_1").on("click", function(event) { 
+    	$("#popup02").hide();
+        $("#popup01").show();  
+        });
+    $(".prevPopup3_2").on("click", function(event) { 
+    	$("#popup03").hide();
+        $("#popup02").show();  
+        });
+    
+    $("body").on("click", function(event) { 
+        if(event.target.className == 'close' || event.target.className == 'close2' || event.target.className == 'close3' || event.target.className == 'backon' || event.target.className == 'submit'){
+            $("#popup01").hide();
+            $("#popup02").hide();
+            $("#popup03").hide();
+      	    $(".backon").hide();
+        }
+      });
+    
+	$("#reset1").click(function(){
+		$("#my-form").find(".pop1").each(function(i){
+			$type=$(this).attr("type");
+			if($type=="text")$(this).val("");
+			if($type=="number")$(this).val("");
+			$(this).prop('selectedIndex',0);
+			if($type=="file")$(this).val("");
+			if($type=="color")$(this).val("");
+		});
+	});
+	
+	$("#reset2").click(function(){
+		$("#my-form").find(".pop2").each(function(i){
+			$type=$(this).attr("type");
+			if($type=="text")$(this).val("");
+			if($type=="number")$(this).val("");
+			$(this).prop('selectedIndex',0);
+			if($type=="file")$(this).val("");
+			if($type=="color")$(this).val("");
+		});
+	});
+	
+	$("#reset3").click(function(){
+		$("#my-form").find(".pop3").each(function(i){
+			$type=$(this).attr("type");
+			if($type=="text")$(this).val("");
+			if($type=="number")$(this).val("");
+			$(this).prop('selectedIndex',0);
+			if($type=="file")$(this).val("");
+			if($type=="color")$(this).val("");
+		});
+	});
+    
+  });
+
+</script>
+    
+</head>
+
+<body>
+
+<button type="button" class="openPopup" style="border-radius: 10px; padding: 30px 30px 30px 30px">팝업 버튼</button> 
+
+<form id="my-form" method="get" action="">
+<div id="popup01">
+    <div class="close">close</div>
+    
+      <div style="text-align:center">
+      <h1>POPUP 1</h1>
+      
+      <div class="my_text">
+      
+      <div>
+      &#60;report&#62;
+      <br>
+      글꼴 이름: <input type="text" class="pop1" name="report_Name" style="width:60px;" size="10">
+      <!--  -->
+      용지 방향: <select class="pop1" name="pageOt">
+      <option value="가로">가로</option>
+      <option value="세로">세로</option>
+      </select>
+      </div>
+      <br>
+      
+      <div>
+      &#60;title&#62;
+      <br>
+      
+      보고서 제목의 색상: <input type="color" class="pop1" name="title_Color" value="#000000">
+      <!--  -->
+      보고서 제목의 크기: <input type="number" class="pop1" name="title_Size" style="width:60px;" size="5">
+      <!--  -->
+      <br>
+      보고서 제목: <input type="text" class="pop1" name="title_val" size="15">
+      </div>
+      <br>
+         
+      <div>
+      &#60;text&#62;
+      <br>
+      일반 글자의 색상: <input type="color" class="pop1" name="text_Color" value="#000000">
+      <!--  -->
+      일반 글자의 크기: <input type="number" class="pop1" name="text_Size" style="width:60px;" size="5">
+      <!--  -->
+      <br>
+      글자의 내용: <input type="text" class="pop1" name="text_val" size="15">   
+      </div>
+      <br>
+      
+      <div>
+      <input type="button" name="resetbutton_1" id="reset1" value="초기화"/>
+      </div>
+      <br> 
+      
+      </div>
+      </div>
+      
+      <button type="button" class="nextPopup1_2" style="border-radius: 10px; padding: 30px 30px 30px 30px">NEXT</button>
+</div>
+
+<div id="popup02">
+	  <div class="close2">close</div>
+	  
+	  <div style="text-align:center">
+      <h1>POPUP 2</h1>
+	  
+	  <div class="my_text">
+	  
+	  <div>
+      &#60;chart&#62;
+      <br>
+      차트 종류:  <select class="pop2" name="chart_type">
+      <option value="꺽은선">꺽은선</option>
+      <option value="원형">원형</option>
+      <option value="막대">막대</option>
+      </select>
+      차트 넓이: <input type="number" class="pop2" name="chart_width" style="width:60px;" size="5">
+      차트 높이: <input type="number" class="pop2" name="chart_heigh" style="width:60px;" size="5">  
+      </div>
+      <br>
+      
+      <div>
+      &#60;img&#62;
+      <br>
+      이미지파일: <input type="file" class="pop2" name="img_file">
+      <!--  -->
+      <br>
+      이미지 넓이: <input type="number" class="pop2" name="img_width" style="width:60px;" size="5">
+      이미지 높이: <input type="number" class="pop2" name="img_heigh" style="width:60px;" size="5">    
+      </div>
+      <br>
+
+	  <div>
+      <input type="button" name="resetbutton_2" id="reset2" value="초기화"/>
+      </div>
+      <br> 
+      
+      </div>
+	  </div>
+	  
+	  <button type="button" class="prevPopup2_1" style="border-radius: 10px; padding: 30px 30px 30px 30px">PREV</button> 
+      <button type="button" class="nextPopup2_3" style="border-radius: 10px; padding: 30px 30px 30px 30px">NEXT</button>
+	  
+</div>
+
+<div id="popup03">
+	  <div class="close3">close</div>
+	  
+	  <div style="text-align:center">
+      <h1>POPUP 3</h1>
+	  
+	  <div class="my_text">
+	  
+	  <br><br>
+	  <div>
+      &#60;table&#62;
+      <br>
+      &#60;thead&#62; 색상: <input type="color" class="pop3" name="thread_FC" value="#000000">
+      <!--  -->
+      &#60;thead&#62; 크기: <input type="number" class="pop3" name="thread_FS" style="width:60px;" size="5">
+      <!--  -->
+      <br>
+      글꼴 타입: <select class="pop3" name="thread_TT">
+      <option value="bold">bold</option>
+      <option value="talic">talic</option>
+      <option value="none">none</option>
+      </select>
+      &#60;thead&#62; 배경 색상: <input type="color" class="pop3" name="thread_BC" value="#000000">
+      <!--  -->
+      <details>
+		<summary style="cursor:pointer">&#60;thead&#62;값</summary>
+			<div style="font-size:0.2em">
+			&#60;thead&#62;(1)값: <input type="text" class="pop3" name="thread_val1" style="width:60px;" size="8">
+			&#60;thead&#62;(2)값: <input type="text" class="pop3" name="thread_val2" style="width:60px;" size="8"><br>
+			&#60;thead&#62;(3)값: <input type="text" class="pop3" name="thread_val3" style="width:60px;" size="8">
+			&#60;thead&#62;(4)값: <input type="text" class="pop3" name="thread_val4" style="width:60px;" size="8"><br>
+			&#60;thead&#62;(5)값: <input type="text" class="pop3" name="thread_val5" style="width:60px;" size="8">
+			&#60;thead&#62;(6)값: <input type="text" class="pop3" name="thread_val6" style="width:60px;" size="8"><br>
+			&#60;thead&#62;(7)값: <input type="text" class="pop3" name="thread_val7" style="width:60px;" size="8">
+			&#60;thead&#62;(8)값: <input type="text" class="pop3" name="thread_val8" style="width:60px;" size="8"><br>
+			</div>
+	  </details>                         
+      <br>
+      
+      &#60;tbody&#62; 색상: <input type="color" class="pop3" name="tbody_FC" value="#000000">
+      <!--  -->
+      &#60;tbody&#62; 크기: <input type="number" class="pop3" name="tbody_FS" style="width:60px;" size="5"><br>
+      <!--  -->
+      &#60;tbody&#62; 배경 색상: <input type="color" class="pop3" name="tbody_BC" value="#000000">
+      <!--  -->
+      <details>
+		<summary style="cursor:pointer">&#60;tbody&#62;값</summary>
+			<div style="font-size:0.2em">
+			&#60;tbody&#62;(1)값: <input type="number" class="pop3" name="tbody_val1" style="width:60px;" size="3">
+			&#60;tbody&#62;(2)값: <input type="number" class="pop3" name="tbody_val2" style="width:60px;" size="3"><br>
+			&#60;tbody&#62;(3)값: <input type="number" class="pop3" name="tbody_val3" style="width:60px;" size="3">
+			&#60;tbody&#62;(4)값: <input type="number" class="pop3" name="tbody_val4" style="width:60px;" size="3"><br>
+			&#60;tbody&#62;(5)값: <input type="number" class="pop3" name="tbody_val5" style="width:60px;" size="3">
+			&#60;tbody&#62;(6)값: <input type="number" class="pop3" name="tbody_val6" style="width:60px;" size="3"><br>
+			&#60;tbody&#62;(7)값: <input type="number" class="pop3" name="tbody_val7" style="width:60px;" size="3">
+			&#60;tbody&#62;(8)값: <input type="number" class="pop3" name="tbody_val8" style="width:60px;" size="3"><br>
+			</div>
+	  </details>                  
+      </div>
+      <br>     
+      
+      <div>
+      <input type="button" name="resetbutton_3" id="reset3" value="초기화"/>
+      <input type="submit" class="submit"/>
+      </div>
+      <br> 
+      
+      </div>
+      </div>
+      
+      <button type="button" class="prevPopup3_2" style="border-radius: 10px; padding: 30px 30px 30px 30px">PREV</button>
+      
+</div>
+
+</form>
+
+</body>
+
+</html>
